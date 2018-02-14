@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -10,20 +11,21 @@ namespace Exercise4A.Controllers
     public class ValuesController : ApiController
     {
         // GET api/values
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
+        [Route ("GetValues")]
+        public IEnumerable<String> Get() {
+            return new string[] { "Value1","Value2" };
         }
-
         // GET api/values/5
+        [Route("GetVal")]
         public string Get(int id)
         {
-            return "value";
+            return "value" +id.ToString();
         }
-
-        // POST api/values
-        public void Post([FromBody]string value)
+        [Route("PostVal")]
+        public HttpResponseMessage Post([FromBody]string value)
         {
+            string val = value;
+            return new HttpResponseMessage() { StatusCode = HttpStatusCode.Created };
         }
 
         // PUT api/values/5
